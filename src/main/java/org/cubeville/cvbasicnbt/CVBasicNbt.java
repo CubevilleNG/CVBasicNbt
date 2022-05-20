@@ -7,7 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import org.cubeville.commons.commands.CommandParser;
 
-
+import org.cubeville.cvbasicnbt.commands.armor.*;
 import org.cubeville.cvbasicnbt.commands.armorstand.*;
 import org.cubeville.cvbasicnbt.commands.entity.*;
 import org.cubeville.cvbasicnbt.commands.item.*;
@@ -23,7 +23,9 @@ public class CVBasicNbt extends JavaPlugin {
     public void onEnable() {
 
         commandParser = new CommandParser();
+        commandParser.addCommand(new ArmorColor());
         commandParser.addCommand(new ArmorStandPoses());
+        commandParser.addCommand(new ArmorStandProperties());
         commandParser.addCommand(new EntityInfo());
         commandParser.addCommand(new EntityMove());
         commandParser.addCommand(new EntityMoveHere());
@@ -44,6 +46,7 @@ public class CVBasicNbt extends JavaPlugin {
         commandParser.addCommand(new ObjectDeselect());
         commandParser.addCommand(new ObjectSelect());
         commandParser.addCommand(new ObjectSelectNearest());
+        commandParser.addCommand(new SignGet());
         commandParser.addCommand(new SignSet());
 
         PluginManager pm = getServer().getPluginManager();

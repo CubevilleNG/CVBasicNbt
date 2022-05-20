@@ -38,7 +38,7 @@ public class SignSet extends CommandWithSign
             throw new CommandExecutionException("Invalid line number!");
 
         for(int i = 0; i < baseParameters.size() - 1; i++) {
-            sign.setLine(i + firstLine - 1, ColorUtils.addColor((String) baseParameters.get(i + 1)));
+            sign.setLine(i + firstLine - 1, ColorUtils.addColorWithoutHeader((String) baseParameters.get(i + 1)));
         }
 
         return new CommandResponse("&aSign text changed.");

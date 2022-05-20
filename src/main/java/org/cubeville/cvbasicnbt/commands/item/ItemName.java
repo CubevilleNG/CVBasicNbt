@@ -16,8 +16,8 @@ import org.cubeville.commons.utils.ColorUtils;
 
 import org.cubeville.cvbasicnbt.commands.CommandWithItem;
 
-public class ItemName extends CommandWithItem {
-
+public class ItemName extends CommandWithItem
+{
     public ItemName() {
         super("item name");
         setPermission("snbt.item");
