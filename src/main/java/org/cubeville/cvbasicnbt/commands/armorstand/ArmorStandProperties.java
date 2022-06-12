@@ -22,7 +22,7 @@ public class ArmorStandProperties extends CommandWithArmorStand
 {
     public ArmorStandProperties() {
         super("armorstand");
-        addBaseParameter(new CommandParameterEnumeratedString(new HashSet<>(Arrays.asList("visible", "baseplate", "smol", "marker", "arms", "lock"))));
+        addBaseParameter(new CommandParameterEnumeratedString(new HashSet<>(Arrays.asList("visible", "baseplate", "smol", "small", "marker", "arms", "lock"))));
         addBaseParameter(new CommandParameterBoolean());
     }
 
@@ -37,7 +37,7 @@ public class ArmorStandProperties extends CommandWithArmorStand
             armorstand.setVisible(value);
         else if(what.equals("baseplate"))
             armorstand.setBasePlate(value);
-        else if(what.equals("smol"))
+        else if(what.equals("smol") || what.equals("small"))
             armorstand.setSmall(value);
         else if(what.equals("marker"))
             armorstand.setMarker(value);
