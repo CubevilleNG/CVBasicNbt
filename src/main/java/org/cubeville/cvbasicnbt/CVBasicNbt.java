@@ -42,6 +42,8 @@ public class CVBasicNbt extends JavaPlugin {
         commandParser.addCommand(new ItemFlags());
         commandParser.addCommand(new ItemLore());
         commandParser.addCommand(new ItemName());
+        commandParser.addCommand(new ItemPotionEffectAdd());
+        commandParser.addCommand(new ItemPotionEffectRemove());
         commandParser.addCommand(new MobEquipment());
         commandParser.addCommand(new ObjectDeselect());
         commandParser.addCommand(new ObjectSelect());

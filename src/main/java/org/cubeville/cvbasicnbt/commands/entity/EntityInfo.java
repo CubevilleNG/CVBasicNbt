@@ -19,14 +19,18 @@ public class EntityInfo extends CommandWithEntity
         super("entity info");
         setPermission("snbt.entity");
         addFlag("detail");
+        addFlag("uuid");
     }
 
     public CommandResponse executeWithEntity(CommandSender sender, Set<String> flags, Map<String, Object> parameters, List<Object> baseParameters, Entity entity, boolean selectedByUUID)
         throws CommandExecutionException {
 
+        if(flags.contains("uuid")) {
+            return new CommandResponse(entity.getUniqueId().toString());
+        }
         CommandResponse cr = new CommandResponse("&6--------------------------");
         boolean detail = flags.contains("detail");
-
+        
         cr.addMessage("&aName&r: &6" + entity.getName());
         cr.addMessage("&aType&r: " + entity.getType());
         cr.addMessage("&aSilent&r: " + (entity.isSilent() ? "yes" : "no"));
