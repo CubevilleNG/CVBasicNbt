@@ -20,8 +20,15 @@ public class CVBasicNbt extends JavaPlugin {
 
     CommandParser commandParser;
 
-    public void onEnable() {
+    static private CVBasicNbt instance;
 
+    static public CVBasicNbt getInstance() {
+        return instance;
+    }
+    
+    public void onEnable() {
+        instance = this;
+        
         commandParser = new CommandParser();
         commandParser.addCommand(new ArmorColor());
         commandParser.addCommand(new ArmorStandPoses());

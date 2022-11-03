@@ -3,6 +3,7 @@ package org.cubeville.cvbasicnbt.utils;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -44,25 +45,23 @@ public class EntityUtils {
         }
         return ret;
     }
-    
-    public static Entity getNearestEntity(Location loc, List<Entity> entities) {
-    	Entity nearestEntity = null;
-    	double distance = 10000;
-    	
+
+    public static Entity getNearestEntity(Location loc, List<Entity> entities, int skipCount) {
     	if (entities == null) {
             return null;
     	}
-    	
-    	for(Entity entity: entities) {
-            System.out.println("Near entity: " + entity.getType() + " at " + entity.getLocation());
-            if (entity.getLocation().distance(loc) < distance) {
-                nearestEntity = entity;
-                distance = entity.getLocation().distance(loc);
-            }
-    	}
-    	
-        return nearestEntity;
-    	
+
+        List<EntityDistance> elist = new ArrayList<>();
+        for(Entity entity: entities) {
+            EntityDistance ed = new EntityDistance(entity, entity.getLocation().distance(loc));
+            elist.add(ed);
+        }
+        Collections.sort(elist);
+
+        if(skipCount < 0 || skipCount >= elist.size()) {
+            return null;
+        }
+        return elist.get(skipCount).entity;
     }
-	
+
 }
