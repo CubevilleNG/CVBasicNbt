@@ -31,6 +31,7 @@ public class CVBasicNbt extends JavaPlugin {
         
         commandParser = new CommandParser();
         commandParser.addCommand(new ArmorColor());
+        commandParser.addCommand(new ArmorStandCopy());
         commandParser.addCommand(new ArmorStandPoses());
         commandParser.addCommand(new ArmorStandProperties());
         commandParser.addCommand(new EntityInfo());

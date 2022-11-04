@@ -17,7 +17,7 @@ import org.cubeville.cvbasicnbt.commands.CommandWithItem;
 public class ItemEnchantmentsRemove extends CommandWithItem {
 
     public ItemEnchantmentsRemove() {
-         super("item enchantments remove");
+         super("item enchant remove");
          setPermission("snbt.item.enchantments");
          addBaseParameter(new CommandParameterEnchantment());
     }

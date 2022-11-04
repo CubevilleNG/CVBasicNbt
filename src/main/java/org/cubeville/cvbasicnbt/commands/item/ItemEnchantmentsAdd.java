@@ -18,7 +18,7 @@ import org.cubeville.cvbasicnbt.commands.CommandWithItem;
 public class ItemEnchantmentsAdd extends CommandWithItem {
 
     public ItemEnchantmentsAdd() {
-        super("item enchantments add");
+        super("item enchant add");
         setPermission("snbt.item.enchantments");
         addBaseParameter(new CommandParameterEnchantment());
         addBaseParameter(new CommandParameterInteger());
