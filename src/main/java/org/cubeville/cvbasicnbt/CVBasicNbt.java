@@ -34,6 +34,7 @@ public class CVBasicNbt extends JavaPlugin {
         commandParser.addCommand(new ArmorStandCopy());
         commandParser.addCommand(new ArmorStandPoses());
         commandParser.addCommand(new ArmorStandProperties());
+        commandParser.addCommand(new EntityBulkMove());
         commandParser.addCommand(new EntityInfo());
         commandParser.addCommand(new EntityMove());
         commandParser.addCommand(new EntityMoveHere());
