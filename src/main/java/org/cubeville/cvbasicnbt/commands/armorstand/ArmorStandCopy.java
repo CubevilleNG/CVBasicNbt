@@ -18,6 +18,7 @@ public class ArmorStandCopy extends CommandWithArmorStand
 {
     public ArmorStandCopy() {
         super("armorstand copy");
+        setPermission("snbt.armorstand");
     }
 
     @Override

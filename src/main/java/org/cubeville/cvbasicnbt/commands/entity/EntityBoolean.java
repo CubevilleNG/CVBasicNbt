@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
@@ -20,7 +22,7 @@ public class EntityBoolean extends CommandWithEntity
     public EntityBoolean() {
         super("entity");
         setPermission("snbt.entity");
-        addBaseParameter(new CommandParameterEnumeratedString("silent", "invulnerable", "glowing", "gravity", "visualfire"));
+        addBaseParameter(new CommandParameterEnumeratedString("silent", "invulnerable", "glow", "gravity", "visualfire", "autoremove"));
         addOptionalBaseParameter(new CommandParameterEnumeratedString("true", "false", "temp"));
     }
 
@@ -37,8 +39,8 @@ public class EntityBoolean extends CommandWithEntity
                 parameter = false;
             if(((String) baseParameters.get(1)).equals("temp")) {
                 temporary = true;
-                if(!action.equals("glowing"))
-                    throw new CommandExecutionException("temp only works for glowing");
+                if(!action.equals("glow"))
+                    throw new CommandExecutionException("temp only works for glow");
             }
         }
         
@@ -46,14 +48,20 @@ public class EntityBoolean extends CommandWithEntity
             entity.setSilent(parameter);
         else if(action.equals("invulnerable"))
             entity.setInvulnerable(parameter);
-        else if(action.equals("glowing"))
+        else if(action.equals("glow"))
             entity.setGlowing(parameter);
         else if(action.equals("gravity"))
             entity.setGravity(parameter);
         else if(action.equals("visualfire"))
             entity.setVisualFire(parameter);
-
-        if(action.equals("glowing") && temporary == true) {
+        else if(action.equals("autoremove")) {
+            if(entity instanceof LivingEntity && (entity instanceof ArmorStand) == false)
+                ((LivingEntity) entity).setRemoveWhenFarAway(parameter);
+            else
+                throw new CommandExecutionException("autoremove can only be set on living entities");
+        }
+        
+        if(action.equals("glow") && temporary == true) {
             new BukkitRunnable() {
                 public void run() {
                     entity.setGlowing(false);

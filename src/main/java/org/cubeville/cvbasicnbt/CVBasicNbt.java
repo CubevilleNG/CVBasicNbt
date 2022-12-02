@@ -31,13 +31,17 @@ public class CVBasicNbt extends JavaPlugin {
         
         commandParser = new CommandParser();
         commandParser.addCommand(new ArmorColor());
+        commandParser.addCommand(new ArmorStandBulkProperties());
         commandParser.addCommand(new ArmorStandCopy());
+        commandParser.addCommand(new ArmorStandSummon());
         commandParser.addCommand(new ArmorStandPoses());
         commandParser.addCommand(new ArmorStandProperties());
+        commandParser.addCommand(new EntityBulkBoolean());
         commandParser.addCommand(new EntityBulkMove());
         commandParser.addCommand(new EntityInfo());
         commandParser.addCommand(new EntityMove());
         commandParser.addCommand(new EntityMoveHere());
+        commandParser.addCommand(new EntityName());
         commandParser.addCommand(new EntityRemove());
         commandParser.addCommand(new EntityRotate());
         commandParser.addCommand(new EntityBoolean());
@@ -65,8 +69,7 @@ public class CVBasicNbt extends JavaPlugin {
         pm.registerEvents(new EventEntityDeath(), this);
         pm.registerEvents(new EventPlayerInteract(), this);
         pm.registerEvents(new EventPlayerInteractEntity(), this);
-        pm.registerEvents(new EventPlayerQuit(), this);
- 
+        pm.registerEvents(new EventPlayerQuit(), this); 
     }
 
     @Override

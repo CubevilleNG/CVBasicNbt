@@ -21,6 +21,7 @@ public class ItemName extends CommandWithItem
     public ItemName() {
         super("item name");
         setPermission("snbt.item");
+        addFlag("append");
         addBaseParameter(new CommandParameterString());
     }
 
@@ -30,8 +31,12 @@ public class ItemName extends CommandWithItem
 
         ItemMeta meta = item.getItemMeta();
 
+        boolean append = flags.contains("append");
+
         String parameter = (String) baseParameters.get(0);
         if(parameter.toLowerCase().equals("get")) {
+            if(append) throw new CommandExecutionException("Can't get and append at the same time.");
+            
             String name = meta.getDisplayName();
             name = ColorUtils.reverseColor(name.replace("\"", "\\\""));
             String json = "[\"\",{\"text\":\"" + name + "\",\"clickEvent\":{\"action\":\"copy_to_clipboard\",\"value\":\"" + name + "\"}},{\"text\":\" §r§a(click to copy to clipboard)\"}]";
@@ -39,11 +44,17 @@ public class ItemName extends CommandWithItem
                                                "tellraw " + player.getName() + " " + json);
             return new CommandResponse(true);
         }
-        
-        meta.setDisplayName(ColorUtils.addColor(parameter));
-        System.out.println("After setting display name: " + ColorUtils.reverseColor(meta.getDisplayName()));
+
+        parameter = ColorUtils.addColor(parameter);
+
+        if(append) {
+            meta.setDisplayName(meta.getDisplayName() + parameter);
+        }
+        else {
+            meta.setDisplayName(ColorUtils.addColor(parameter));
+        }
         item.setItemMeta(meta);
-        
+
         return new CommandResponse("&aItem name set to &r" + baseParameters.get(0));
     }
 
