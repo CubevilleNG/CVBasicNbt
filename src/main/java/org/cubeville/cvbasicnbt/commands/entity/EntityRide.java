@@ -48,8 +48,20 @@ public class EntityRide extends Command {
         if(flags.contains("reverse")) {
             if(player.getPassengers().isEmpty()) {
                 player.addPassenger(target);
-            } else if(player.getPassengers().get(player.getPassengers().size() - 1) != target) {
+            } /*else if(player.getPassengers().get(player.getPassengers().size() - 1) != target) {
                 player.getPassengers().get(player.getPassengers().size() - 1).addPassenger(target);
+            }*/else {
+                boolean lastOne = false;
+                Entity e = player;
+                while(!lastOne) {
+                    e = e.getPassengers().get(e.getPassengers().size() - 1);
+                    if(e.getPassengers().isEmpty()) {
+                        lastOne = true;
+                    }
+                }
+                if(e != target) {
+                    e.addPassenger(target);
+                }
             }
         } else if(flags.contains("stack")) {
             //TODO ?
