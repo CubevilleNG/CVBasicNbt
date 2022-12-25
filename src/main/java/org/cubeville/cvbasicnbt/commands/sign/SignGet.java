@@ -29,7 +29,8 @@ public class SignGet extends CommandWithSign
             String line = sign.getLine(i);
             String linenr = String.valueOf(i + 1);
             if(line != null && line.equals("") == false) {
-                String setcommand = "/snbt sign set " + linenr + "\\\"" + ColorUtils.reverseColor(line) + "\\\"";
+                //String setcommand = "/snbt sign set " + linenr + "\\\"" + ColorUtils.reverseColor(line) + "\\\"";
+                String setcommand = "/snbt sign set " + linenr + " \\\"" + ColorUtils.reverseColor(line) + "\\\"";
                 String clip = ColorUtils.reverseColor(line);
                 String o = "tellraw " + player.getName() + " [\"\",{\"text\":\"" + linenr + ". \"},{\"text\":\"[\",\"color\":\"aqua\",\"clickEvent\":{\"action\":\"suggest_command\",\"value\":\"" + setcommand + "\"}},{\"text\":\"Chat\",\"color\":\"green\",\"clickEvent\":{\"action\":\"suggest_command\",\"value\":\"" + setcommand + "\"}},{\"text\":\"]\",\"color\":\"aqua\",\"clickEvent\":{\"action\":\"suggest_command\",\"value\":\"" + setcommand + "\"}},{\"text\":\" \"},{\"text\":\"[\",\"color\":\"aqua\",\"clickEvent\":{\"action\":\"copy_to_clipboard\",\"value\":\"" + clip + "\"}},{\"text\":\"Clip\",\"color\":\"green\",\"clickEvent\":{\"action\":\"copy_to_clipboard\",\"value\":\"" + clip + "\"}},{\"text\":\"]\",\"color\":\"aqua\",\"clickEvent\":{\"action\":\"copy_to_clipboard\",\"value\":\"" + clip + "\"}},{\"text\":\" " + clip + "\"}]";
                 Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), o);
