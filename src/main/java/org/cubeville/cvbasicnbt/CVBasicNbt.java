@@ -86,7 +86,8 @@ public class CVBasicNbt extends JavaPlugin {
         pm.registerEvents(new EventEntityDeath(), this);
         pm.registerEvents(new EventPlayerInteract(), this);
         pm.registerEvents(new EventPlayerInteractEntity(), this);
-        pm.registerEvents(new EventPlayerQuit(), this); 
+        pm.registerEvents(new EventPlayerQuit(), this);
+        pm.registerEvents(new EventArmorStandBreak(), this);
     }
 
     @Override
