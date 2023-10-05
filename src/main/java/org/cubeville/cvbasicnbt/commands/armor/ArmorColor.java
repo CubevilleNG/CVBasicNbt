@@ -23,7 +23,7 @@ public class ArmorColor extends CommandWithItem
         addBaseParameter(new CommandParameterColor());
         addFlag("add");
     }
-    
+
     @Override
     public CommandResponse executeWithItem(Player player, Set<String> flags, Map<String, Object> parameters, List<Object> baseParameters, ItemStack item)
         throws CommandExecutionException {
@@ -48,5 +48,4 @@ public class ArmorColor extends CommandWithItem
             return new CommandResponse("&aArmor color changed to &6" + ((Color) baseParameters.get(0)).toString());
         }
     }
-
 }
