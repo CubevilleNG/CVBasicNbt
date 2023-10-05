@@ -45,7 +45,7 @@ public class EventBlockRemoval implements Listener {
     public void removeBlock(Block block) {
         if(CommandMap.containsObject(block)) {
             for (Player player: Bukkit.getOnlinePlayers()) {
-                if(CommandMap.get(player).equals(block)) {
+                if(CommandMap.get(player) != null && CommandMap.get(player).equals(block)) {
                     player.sendMessage(ColorUtils.addColor("&cSelected block has been removed! Entity deselected."));
                 }
             }
