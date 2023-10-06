@@ -25,6 +25,7 @@ public class ItemLore extends CommandWithItem {
 
         addParameter("replace", true, new CommandParameterInteger());
         addParameter("insert", true, new CommandParameterInteger());
+        addParameter("set", true, new CommandParameterInteger());
         addFlag("add");
         addFlag("append");
         
@@ -46,18 +47,18 @@ public class ItemLore extends CommandWithItem {
         
         ItemMeta meta = item.getItemMeta();
 
-        List<String> lore;
-        
-        lore = meta.getLore();
+        List<String> lore = meta.getLore();
+        if(lore == null) lore = new ArrayList<String>();
+
         boolean insert = parameters.containsKey("insert");
         boolean append = flags.contains("append");
+
         int offset = 0;
         if(insert)
-            offset = (Integer) parameters.get("insert");
+            offset = ((Integer) parameters.get("insert")) - 1;
         else
             if(parameters.containsKey("set"))
-                offset = (Integer) parameters.get("set");
-        // TODO: Originally contained "-1"? Test
+                offset = ((Integer) parameters.get("set")) - 1;
         
         for(int i = 0; i < plore.size(); i++) {
             if(insert)
@@ -65,8 +66,18 @@ public class ItemLore extends CommandWithItem {
             else {
                 if(append)
                     lore.set(i + offset, lore.get(i + offset) + plore.get(i));
-                else
-                    lore.set(i + offset, plore.get(i));
+                else {
+                    if(i + offset >= lore.size())
+                        lore.add(plore.get(i));
+                    else
+                        lore.set(i + offset, plore.get(i));
+                }
+            }
+        }
+
+        if(insert == false && parameters.containsKey("set") == false) {
+            while(lore.size() > plore.size()) {
+                lore.remove(lore.size() - 1);
             }
         }
         
