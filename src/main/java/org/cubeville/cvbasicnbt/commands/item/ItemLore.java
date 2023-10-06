@@ -52,9 +52,13 @@ public class ItemLore extends CommandWithItem {
         boolean insert = parameters.containsKey("insert");
         boolean append = flags.contains("append");
         int offset = 0;
-        if(insert) offset = (Integer) parameters.get("insert");
-        else if(parameters.containsKey("set")) offset = (Integer) parameters.get("set");
-        int offset = (Integer) (insert ? parameters.get("insert") : parameters.get("set")) - 1;
+        if(insert)
+            offset = (Integer) parameters.get("insert");
+        else
+            if(parameters.containsKey("set"))
+                offset = (Integer) parameters.get("set");
+        // TODO: Originally contained "-1"? Test
+        
         for(int i = 0; i < plore.size(); i++) {
             if(insert)
                 lore.add(i + offset, plore.get(i));
@@ -65,10 +69,10 @@ public class ItemLore extends CommandWithItem {
                     lore.set(i + offset, plore.get(i));
             }
         }
-
+        
         meta.setLore(lore);
         item.setItemMeta(meta);
-
+        
         return new CommandResponse("&aItem lore changed.");
     }
     
