@@ -26,6 +26,7 @@ public class ItemLore extends CommandWithItem {
         addParameter("replace", true, new CommandParameterInteger());
         addParameter("insert", true, new CommandParameterInteger());
         addParameter("set", true, new CommandParameterInteger());
+        addParameter("remove", true, new CommandParameterInteger());
         addFlag("add");
         addFlag("append");
         
@@ -39,17 +40,23 @@ public class ItemLore extends CommandWithItem {
         throws CommandExecutionException {
 
         if(flags.contains("add")) throw new CommandExecutionException("Command syntax has changed");
+
+        ItemMeta meta = item.getItemMeta();
+        List<String> lore = meta.getLore();
+        if(lore == null) lore = new ArrayList<String>();
+        
+        if(parameters.containsKey("remove")) {
+            lore.remove(((Integer) parameters.get("remove")) - 1);
+            meta.setLore(lore);
+            item.setItemMeta(meta);
+            return new CommandResponse("&aLine removed.");
+        }
         
         List<String> plore = new ArrayList<>();
         for(Object l: baseParameters) {
             plore.add(ColorUtils.addColor((String) l));
         }
         
-        ItemMeta meta = item.getItemMeta();
-
-        List<String> lore = meta.getLore();
-        if(lore == null) lore = new ArrayList<String>();
-
         boolean insert = parameters.containsKey("insert");
         boolean append = flags.contains("append");
 
